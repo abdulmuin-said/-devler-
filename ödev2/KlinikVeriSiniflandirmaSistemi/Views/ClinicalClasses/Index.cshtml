@@ -1,0 +1,47 @@
+@model IEnumerable<ClinicalClass>
+
+@{
+    ViewData["Title"] = "Sınıflandırma Kategorileri";
+}
+
+@if (TempData["Error"] is not null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="card table-card">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h2 class="h5 mb-0">Kategoriler</h2>
+        <a asp-action="Create" class="btn btn-success">Yeni Kategori</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Ad</th>
+                    <th>Risk Seviyesi</th>
+                    <th>Renk</th>
+                    <th>Kayıt Sayısı</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var color = item.ColorCode == "orange" ? "badge-orange" : $"text-bg-{item.ColorCode}";
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.RiskLevel</td>
+                        <td><span class="badge @color">@item.ColorCode</span></td>
+                        <td>@item.ClinicalRecords.Count</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm">Detay</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Düzenle</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

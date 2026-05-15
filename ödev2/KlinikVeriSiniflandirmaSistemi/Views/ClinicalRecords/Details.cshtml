@@ -1,0 +1,49 @@
+@model ClinicalRecord
+
+@{
+    ViewData["Title"] = "Klinik Kayıt Detay";
+    var color = Model.ClinicalClass?.ColorCode == "orange" ? "badge-orange" : $"text-bg-{Model.ClinicalClass?.ColorCode ?? "secondary"}";
+}
+
+<div class="row g-3">
+    <div class="col-lg-5">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5">@(Model.Patient?.FirstName) @(Model.Patient?.LastName)</h2>
+                <p class="text-muted">@Model.Patient?.PatientNumber</p>
+                <span class="badge @color mb-3">@Model.ClinicalClass?.Name - @Model.ClinicalClass?.RiskLevel</span>
+                <dl class="row mb-0">
+                    <dt class="col-4">Şikayet</dt>
+                    <dd class="col-8">@Model.Complaint</dd>
+                    <dt class="col-4">Tanı</dt>
+                    <dd class="col-8">@Model.Diagnosis</dd>
+                    <dt class="col-4">Tarih</dt>
+                    <dd class="col-8">@Model.RecordDate.ToString("dd.MM.yyyy")</dd>
+                    <dt class="col-4">Notlar</dt>
+                    <dd class="col-8">@Model.Notes</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-white d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Geri Dön</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h2 class="h5 mb-0">Klinik Değerler</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Büyük Tansiyon <strong class="d-block">@Model.SystolicBloodPressure</strong></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Küçük Tansiyon <strong class="d-block">@Model.DiastolicBloodPressure</strong></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Nabız <strong class="d-block">@Model.Pulse</strong></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Vücut Sıcaklığı <strong class="d-block">@Model.BodyTemperature</strong></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Kan Şekeri <strong class="d-block">@Model.BloodSugar</strong></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3">Kolesterol <strong class="d-block">@Model.Cholesterol</strong></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+@model ClinicalClass
+
+<div class="col-md-6">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="col-md-6">
+    <label asp-for="RiskLevel" class="form-label"></label>
+    <input asp-for="RiskLevel" class="form-control" placeholder="Örn: Düşük Risk" />
+    <span asp-validation-for="RiskLevel" class="text-danger"></span>
+</div>
+<div class="col-md-6">
+    <label asp-for="ColorCode" class="form-label"></label>
+    <select asp-for="ColorCode" class="form-select">
+        <option value="">Seçiniz</option>
+        <option value="success">success</option>
+        <option value="warning">warning</option>
+        <option value="danger">danger</option>
+        <option value="info">info</option>
+        <option value="orange">orange</option>
+        <option value="secondary">secondary</option>
+    </select>
+    <span asp-validation-for="ColorCode" class="text-danger"></span>
+</div>
+<div class="col-12">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>

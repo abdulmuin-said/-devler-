@@ -1,0 +1,64 @@
+@model Patient
+
+@{
+    ViewData["Title"] = "Hasta Detay";
+}
+
+<div class="row g-3">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5">@Model.FirstName @Model.LastName</h2>
+                <p class="text-muted mb-3">@Model.PatientNumber</p>
+                <dl class="row mb-0">
+                    <dt class="col-5">Doğum</dt>
+                    <dd class="col-7">@Model.BirthDate.ToString("dd.MM.yyyy")</dd>
+                    <dt class="col-5">Cinsiyet</dt>
+                    <dd class="col-7">@Model.Gender</dd>
+                    <dt class="col-5">Telefon</dt>
+                    <dd class="col-7">@Model.Phone</dd>
+                    <dt class="col-5">Adres</dt>
+                    <dd class="col-7">@Model.Address</dd>
+                    <dt class="col-5">Oluşturma</dt>
+                    <dd class="col-7">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-white d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Geri Dön</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card table-card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h2 class="h5 mb-0">Klinik Kayıtlar</h2>
+                <a asp-controller="ClinicalRecords" asp-action="Create" class="btn btn-success btn-sm">Yeni Kayıt</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Tanı</th>
+                            <th>Sınıf</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model.ClinicalRecords.OrderByDescending(r => r.RecordDate))
+                        {
+                            var color = record.ClinicalClass?.ColorCode == "orange" ? "badge-orange" : $"text-bg-{record.ClinicalClass?.ColorCode ?? "secondary"}";
+                            <tr>
+                                <td>@record.RecordDate.ToString("dd.MM.yyyy")</td>
+                                <td>@record.Diagnosis</td>
+                                <td><span class="badge @color">@record.ClinicalClass?.Name</span></td>
+                                <td class="text-end"><a asp-controller="ClinicalRecords" asp-action="Details" asp-route-id="@record.Id" class="btn btn-outline-secondary btn-sm">Detay</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
