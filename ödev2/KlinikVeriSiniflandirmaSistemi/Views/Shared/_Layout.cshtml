@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Klinik Veri Sınıflandırma Sistemi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KlinikVeriSiniflandirmaSistemi.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-mark">K</span>
+                <div>
+                    <strong>Klinik Veri</strong>
+                    <small>Sınıflandırma Sistemi</small>
+                </div>
+            </div>
+
+            <nav class="nav flex-column sidebar-nav">
+                <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                <a class="nav-link" asp-controller="Patients" asp-action="Index">Hastalar</a>
+                <a class="nav-link" asp-controller="ClinicalRecords" asp-action="Index">Klinik Kayıtlar</a>
+                <a class="nav-link" asp-controller="ClinicalClasses" asp-action="Index">Sınıflandırma Kategorileri</a>
+            </nav>
+        </aside>
+
+        <div class="content-shell">
+            <header class="topbar">
+                <div>
+                    <span class="text-muted small">Admin Panel</span>
+                    <h1 class="h4 mb-0">@ViewData["Title"]</h1>
+                </div>
+                <span class="badge rounded-pill text-bg-primary">PostgreSQL + EF Core</span>
+            </header>
+
+            <main role="main" class="page-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

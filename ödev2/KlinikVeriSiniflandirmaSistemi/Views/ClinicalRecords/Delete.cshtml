@@ -1,0 +1,17 @@
+@model ClinicalRecord
+
+@{
+    ViewData["Title"] = "Klinik Kayıt Sil";
+}
+
+<div class="card border-danger">
+    <div class="card-body">
+        <h2 class="h5 text-danger">Bu klinik kaydı silmek istiyor musunuz?</h2>
+        <p>@(Model.Patient?.FirstName) @(Model.Patient?.LastName) - @Model.Diagnosis - @Model.RecordDate.ToString("dd.MM.yyyy")</p>
+        <form asp-action="Delete" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Sil</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </form>
+    </div>
+</div>

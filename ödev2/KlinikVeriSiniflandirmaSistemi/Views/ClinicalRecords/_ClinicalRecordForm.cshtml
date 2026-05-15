@@ -1,0 +1,59 @@
+@model ClinicalRecord
+
+<div class="col-md-6">
+    <label asp-for="PatientId" class="form-label"></label>
+    <select asp-for="PatientId" asp-items="ViewBag.PatientId" class="form-select">
+        <option value="">Hasta seçiniz</option>
+    </select>
+    <span asp-validation-for="PatientId" class="text-danger"></span>
+</div>
+<div class="col-md-6">
+    <label asp-for="RecordDate" class="form-label"></label>
+    <input asp-for="RecordDate" type="date" class="form-control" />
+    <span asp-validation-for="RecordDate" class="text-danger"></span>
+</div>
+<div class="col-md-6">
+    <label asp-for="Complaint" class="form-label"></label>
+    <textarea asp-for="Complaint" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Complaint" class="text-danger"></span>
+</div>
+<div class="col-md-6">
+    <label asp-for="Diagnosis" class="form-label"></label>
+    <textarea asp-for="Diagnosis" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Diagnosis" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="SystolicBloodPressure" class="form-label"></label>
+    <input asp-for="SystolicBloodPressure" type="number" min="0" class="form-control" />
+    <span asp-validation-for="SystolicBloodPressure" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="DiastolicBloodPressure" class="form-label"></label>
+    <input asp-for="DiastolicBloodPressure" type="number" min="0" class="form-control" />
+    <span asp-validation-for="DiastolicBloodPressure" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="Pulse" class="form-label"></label>
+    <input asp-for="Pulse" type="number" min="0" class="form-control" />
+    <span asp-validation-for="Pulse" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="BodyTemperature" class="form-label"></label>
+    <input asp-for="BodyTemperature" type="number" step="0.1" min="0" class="form-control" />
+    <span asp-validation-for="BodyTemperature" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="BloodSugar" class="form-label"></label>
+    <input asp-for="BloodSugar" type="number" min="0" class="form-control" />
+    <span asp-validation-for="BloodSugar" class="text-danger"></span>
+</div>
+<div class="col-md-4">
+    <label asp-for="Cholesterol" class="form-label"></label>
+    <input asp-for="Cholesterol" type="number" min="0" class="form-control" />
+    <span asp-validation-for="Cholesterol" class="text-danger"></span>
+</div>
+<div class="col-12">
+    <label asp-for="Notes" class="form-label"></label>
+    <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Notes" class="text-danger"></span>
+</div>

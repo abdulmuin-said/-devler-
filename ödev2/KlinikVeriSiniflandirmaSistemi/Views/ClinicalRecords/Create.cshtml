@@ -1,0 +1,26 @@
+@model ClinicalRecord
+
+@{
+    ViewData["Title"] = "Klinik Kayıt Ekle";
+}
+
+<div class="alert alert-info">
+    Klinik değerler kaydedildiğinde sistem otomatik olarak Normal, Riskli, Acil veya Kronik Takip Gerekli sınıfı atar.
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <partial name="_ClinicalRecordForm" model="Model" />
+            <div class="col-12 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Kaydet ve Sınıflandır</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Geri Dön</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

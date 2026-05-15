@@ -1,0 +1,24 @@
+@model ClinicalClass
+
+@{
+    ViewData["Title"] = "Kategori Detay";
+    var color = Model.ColorCode == "orange" ? "badge-orange" : $"text-bg-{Model.ColorCode}";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="h5">@Model.Name</h2>
+        <p class="mb-2"><span class="badge @color">@Model.RiskLevel</span></p>
+        <p class="text-muted">@Model.Description</p>
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Renk Kodu</dt>
+            <dd class="col-sm-9">@Model.ColorCode</dd>
+            <dt class="col-sm-3">Bağlı Kayıt</dt>
+            <dd class="col-sm-9">@Model.ClinicalRecords.Count</dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-white d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Düzenle</a>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Geri Dön</a>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+@model ClinicalClass
+
+@{
+    ViewData["Title"] = "Kategori Sil";
+}
+
+<div class="card border-danger">
+    <div class="card-body">
+        <h2 class="h5 text-danger">Bu kategoriyi silmek istiyor musunuz?</h2>
+        <p><strong>@Model.Name</strong> kategorisine bağlı @Model.ClinicalRecords.Count klinik kayıt bulunuyor.</p>
+        <form asp-action="Delete" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="Id" />
+            @if (Model.ClinicalRecords.Any())
+            {
+                <button type="submit" class="btn btn-danger" disabled>Sil</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-danger">Sil</button>
+            }
+            <a asp-action="Index" class="btn btn-outline-secondary">Vazgeç</a>
+        </form>
+        @if (Model.ClinicalRecords.Any())
+        {
+            <div class="alert alert-warning mt-3 mb-0">Bağlı klinik kayıt olduğu için bu kategori silinemez.</div>
+        }
+    </div>
+</div>
