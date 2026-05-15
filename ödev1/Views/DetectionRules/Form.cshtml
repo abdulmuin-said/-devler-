@@ -1,0 +1,43 @@
+@model DetectionRuleFormViewModel
+@{
+    ViewData["Title"] = Model.Id.HasValue ? "Kural Düzenle" : "Yeni Kural";
+}
+
+<h1 class="h3">@ViewData["Title"]</h1>
+
+<form asp-action="Save" method="post" class="card card-body shadow-sm">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="RuleType" class="form-label"></label>
+            <select asp-for="RuleType" asp-items="Html.GetEnumSelectList<DetectionRuleType>()" class="form-select"></select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="RiskPoint" class="form-label"></label>
+            <input asp-for="RiskPoint" class="form-control" />
+            <span asp-validation-for="RiskPoint" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <div class="form-check"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label"></label></div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <button class="btn btn-primary" type="submit">Kaydet</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">İptal</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

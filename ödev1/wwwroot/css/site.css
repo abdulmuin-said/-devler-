@@ -1,0 +1,70 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background: #f6f8fb;
+}
+
+.card {
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.metric-card {
+  background: #fff;
+  border: 1px solid #e4e8ef;
+  border-left: 6px solid #0d6efd;
+  border-radius: 14px;
+  padding: 18px;
+  min-height: 110px;
+}
+
+.metric-card span {
+  display: block;
+  color: #6c757d;
+  font-size: .9rem;
+}
+
+.metric-card strong {
+  display: block;
+  font-size: 2rem;
+  margin-top: 8px;
+}
+
+.metric-card.success {
+  border-left-color: #198754;
+}
+
+.metric-card.warning {
+  border-left-color: #ffc107;
+}
+
+.metric-card.danger {
+  border-left-color: #dc3545;
+}
+
+.path-cell {
+  max-width: 420px;
+}
+
+.ethics-hero {
+  background: linear-gradient(135deg, #101828, #1d4ed8);
+  color: #fff;
+}

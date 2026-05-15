@@ -1,0 +1,47 @@
+@model ProcessReportCreateViewModel
+@{
+    ViewData["Title"] = "Yeni Analiz";
+}
+
+<h1 class="h3">Yeni Analiz</h1>
+<p class="text-muted">Bu form manuel gözlem verisi içindir. Sistem canlı process taraması veya tuş kaydı yapmaz.</p>
+
+<form asp-action="Create" method="post" class="card card-body shadow-sm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="ProcessName" class="form-label"></label>
+            <input asp-for="ProcessName" class="form-control" placeholder="svhost.exe" />
+            <span asp-validation-for="ProcessName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Publisher" class="form-label"></label>
+            <input asp-for="Publisher" class="form-control" placeholder="Microsoft Corporation / Unknown" />
+            <span asp-validation-for="Publisher" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="FilePath" class="form-label"></label>
+            <input asp-for="FilePath" class="form-control" placeholder="C:\Users\Student\AppData\Roaming\example.exe" />
+            <span asp-validation-for="FilePath" class="text-danger"></span>
+        </div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="RunsAtStartup" class="form-check-input" /><label asp-for="RunsAtStartup" class="form-check-label"></label></div></div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="RunsInBackground" class="form-check-input" /><label asp-for="RunsInBackground" class="form-check-label"></label></div></div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="KeyboardAccessSuspicion" class="form-check-input" /><label asp-for="KeyboardAccessSuspicion" class="form-check-label"></label></div></div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="HasNetworkConnection" class="form-check-input" /><label asp-for="HasNetworkConnection" class="form-check-label"></label></div></div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="RunsFromTempOrAppData" class="form-check-input" /><label asp-for="RunsFromTempOrAppData" class="form-check-label"></label></div></div>
+        <div class="col-md-4"><div class="form-check"><input asp-for="FakeSystemFileName" class="form-check-input" /><label asp-for="FakeSystemFileName" class="form-check-label"></label></div></div>
+        <div class="col-12">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mt-4">
+        <button class="btn btn-primary" type="submit">Analiz Et ve Kaydet</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Listeye Dön</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

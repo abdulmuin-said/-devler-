@@ -1,0 +1,72 @@
+@model AnalysisDetailViewModel
+@{
+    ViewData["Title"] = "Analiz Detay";
+}
+
+<div class="d-flex justify-content-between align-items-start mb-3">
+    <div>
+        <h1 class="h3 mb-1">@Model.Report.ProcessName</h1>
+        <p class="text-muted mb-0">@Model.Report.FilePath</p>
+    </div>
+    <span class="badge fs-6 @Model.Result.RiskLevel.GetBadgeClass()">@Model.Result.RiskLevel.GetDisplayName() - @Model.Result.TotalScore</span>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="card h-100">
+            <div class="card-header bg-white fw-semibold">Process Bilgileri</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Yayıncı</dt><dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Report.Publisher) ? "Bilinmeyen" : Model.Report.Publisher)</dd>
+                    <dt class="col-sm-4">Başlangıçta Çalışma</dt><dd class="col-sm-8">@(Model.Report.RunsAtStartup ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Arka Planda Çalışma</dt><dd class="col-sm-8">@(Model.Report.RunsInBackground ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Klavye Erişimi Şüphesi</dt><dd class="col-sm-8">@(Model.Report.KeyboardAccessSuspicion ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Ağ Bağlantısı</dt><dd class="col-sm-8">@(Model.Report.HasNetworkConnection ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Temp/AppData</dt><dd class="col-sm-8">@(Model.Report.RunsFromTempOrAppData ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Sahte Sistem Adı</dt><dd class="col-sm-8">@(Model.Report.FakeSystemFileName ? "Evet" : "Hayır")</dd>
+                    <dt class="col-sm-4">Açıklama</dt><dd class="col-sm-8">@Model.Report.Description</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card h-100">
+            <div class="card-header bg-white fw-semibold">Sonuç</div>
+            <div class="card-body">
+                <p>@Model.Result.Summary</p>
+                <div class="progress mb-3" role="progressbar" aria-label="Risk skoru">
+                    <div class="progress-bar" style="width: @Model.Result.TotalScore%">@Model.Result.TotalScore</div>
+                </div>
+                <p class="small text-muted mb-0">0-30 düşük, 31-60 orta, 61-100 yüksek risk olarak sınıflandırılır.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mt-1">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header bg-white fw-semibold">Tetiklenen Kurallar</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var triggered in Model.TriggeredRules)
+                {
+                    <li class="list-group-item d-flex justify-content-between gap-3">
+                        <div><strong>@triggered.DetectionRule?.Name</strong><br /><span class="text-muted small">@triggered.Reason</span></div>
+                        <span class="badge text-bg-secondary align-self-start">+@triggered.AddedScore</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header bg-white fw-semibold">Öneriler</div>
+            <ul class="list-group list-group-flush">
+                @foreach (var recommendation in Model.Recommendations)
+                {
+                    <li class="list-group-item"><strong>@recommendation.Title</strong><br />@recommendation.Description</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: keylogger_tespit_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keylogger_tespit_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "55432:5432"
+    volumes:
+      - keylogger_tespit_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d keylogger_tespit_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  keylogger_tespit_pgdata:

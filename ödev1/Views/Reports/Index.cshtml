@@ -1,0 +1,29 @@
+@model ReportsViewModel
+@{
+    ViewData["Title"] = "Raporlar";
+}
+
+<h1 class="h3">Raporlar</h1>
+<p class="text-muted">Analiz sonuçlarının risk dağılımı ve en çok tetiklenen kurallar.</p>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="metric-card"><span>Toplam</span><strong>@Model.TotalAnalyses</strong></div></div>
+    <div class="col-md-3"><div class="metric-card success"><span>Düşük</span><strong>@Model.LowRiskCount</strong></div></div>
+    <div class="col-md-3"><div class="metric-card warning"><span>Orta</span><strong>@Model.MediumRiskCount</strong></div></div>
+    <div class="col-md-3"><div class="metric-card danger"><span>Yüksek</span><strong>@Model.HighRiskCount</strong></div></div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white fw-semibold">En Çok Tetiklenen Kurallar</div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead><tr><th>Kural</th><th>Tetiklenme Sayısı</th></tr></thead>
+            <tbody>
+            @foreach (var item in Model.MostTriggeredRules)
+            {
+                <tr><td>@item.RuleName</td><td>@item.Count</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

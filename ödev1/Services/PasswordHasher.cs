@@ -1,0 +1,20 @@
+using System.Security.Cryptography;
+using System.Text;
+
+namespace KeyloggerTespitSistemi.Services;
+
+public static class PasswordHasher
+{
+    private const string Salt = "KeyloggerTespitSistemi.StudentProject.Salt";
+
+    public static string Hash(string password)
+    {
+        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes($"{Salt}:{password}"));
+        return Convert.ToHexString(bytes);
+    }
+
+    public static bool Verify(string password, string hash)
+    {
+        return string.Equals(Hash(password), hash, StringComparison.OrdinalIgnoreCase);
+    }
+}

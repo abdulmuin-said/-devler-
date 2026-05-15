@@ -1,0 +1,29 @@
+@model List<ProcessReport>
+@{
+    ViewData["Title"] = "Analiz Listesi";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Analiz Listesi</h1>
+    <a class="btn btn-primary" asp-action="Create">Yeni Analiz</a>
+</div>
+
+<div class="table-responsive card">
+    <table class="table table-hover align-middle mb-0">
+        <thead><tr><th>Process</th><th>Yayıncı</th><th>Risk</th><th>Puan</th><th>Ekleyen</th><th>Tarih</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td>@report.ProcessName</td>
+                <td>@(string.IsNullOrWhiteSpace(report.Publisher) ? "Bilinmeyen" : report.Publisher)</td>
+                <td><span class="badge @report.AnalysisResult?.RiskLevel.GetBadgeClass()">@report.AnalysisResult?.RiskLevel.GetDisplayName()</span></td>
+                <td>@report.AnalysisResult?.TotalScore</td>
+                <td>@report.User?.FullName</td>
+                <td>@report.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                <td><a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@report.Id">Detay</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
